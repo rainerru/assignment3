@@ -2,7 +2,7 @@ import java.lang.ArithmeticException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class calculator
+public class Calculator
 {
 
 	public double evaluate ( String input )
@@ -12,7 +12,7 @@ public class calculator
 		Pattern numberPattern = Pattern.compile("[(\\d\\.\\d)\\d)]+");
 		Matcher matcher = pattern.matcher(input);
 		Matcher numberMatcher;
-		customStack<Double> stack = new customStack<Double>();
+		CustomStack<Double> stack = new CustomStack<Double>();
 		String currentExpression;
 
 		while ( matcher.find() )
@@ -40,16 +40,5 @@ public class calculator
 		return stack.pop();
 
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 }

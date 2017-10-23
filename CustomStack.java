@@ -1,19 +1,19 @@
 import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 
-public class customStack<T> {
+public class CustomStack<T> {
 
 	protected T onTop;
-	protected customStack<T> below;
+	protected CustomStack<T> below;
 
-	public customStack () {}
+	public CustomStack () {}
 
-	public customStack ( T firstElement )
+	public CustomStack ( T firstElement )
 	{
 		this.onTop = firstElement;
 	}
 
-	public customStack ( T firstElement, customStack<T> theStackBelow )
+	public CustomStack ( T firstElement, CustomStack<T> theStackBelow )
 	{
 		this.onTop = firstElement;
 		this.below = theStackBelow;
@@ -33,7 +33,7 @@ public class customStack<T> {
 		return this.onTop;
 	}
 
-	public customStack<T> peekBelow ()
+	public CustomStack<T> peekBelow ()
 	{
 		return this.below;
 	}
@@ -61,13 +61,13 @@ public class customStack<T> {
 		if ( this.onTop == null )	this.onTop = newItem;
 		else 
 		{
-			customStack<T> newStack = new customStack<T>(this.onTop,this.below);
+			CustomStack<T> newStack = new CustomStack<T>(this.onTop,this.below);
 			this.below = newStack;
 			this.onTop = newItem;
 		}
 	}
 
-	int search ( T item )
+	public int search ( T item )
 	{
 		int counter = 0;
 		if ( this.onTop.equals(item) ) return counter;
