@@ -5,6 +5,13 @@ import java.util.regex.Pattern;
 public class Calculator
 {
 
+	/**
+	 * If the input is an expression in Reverse Polish notation, CustomStacks are being
+	 * used to calculate said expression.
+	 *
+	 * @param	input	the string which will be evaluated, if it is in the right notation
+	 * @return			the result of the beforementioned evaluation
+	 */
 	public double evaluate ( String input )
 	{
 
@@ -15,22 +22,28 @@ public class Calculator
 		CustomStack<Double> stack = new CustomStack<Double>();
 		String currentExpression;
 
+		// Strategy: Go through all groups in the string
 		while ( matcher.find() )
 		{
 				currentExpression = matcher.group(0);
 				numberMatcher = numberPattern.matcher(currentExpression);
+				// If it is a number, push it onto the stack
 				if ( numberMatcher.matches() ) stack.push( Double.parseDouble(currentExpression) );
 				else if ( stack.peek() == null || stack.peekBelow() == null )
 				{
 					ArithmeticException e = new ArithmeticException(
 						"Input is not a valid arithmetic expression in Reverse Polish notation: " + input);
 					throw e;
-				}	else if ( currentExpression.equals("+") ) stack.push( stack.pop() + stack.pop() );
+				}
+				// If it is an operation, aplly it to the next two numbers on the stack
+				else if ( currentExpression.equals("+") ) stack.push( stack.pop() + stack.pop() );
 				else if ( currentExpression.equals("*") ) stack.push( stack.pop() * stack.pop() );
 				else if ( currentExpression.equals("-") ) stack.push( stack.pop() - stack.pop() );
 				else if ( currentExpression.equals("/") ) stack.push( stack.pop() / stack.pop() );
     }
 
+		// Eventually, only one number (the result) should remain on the stack. If not,
+		// something is wrong.
 		if ( stack.peek() == null || !(stack.peekBelow() == null) )
 		{
 			ArithmeticException e	= new ArithmeticException(
