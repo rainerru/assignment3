@@ -107,6 +107,19 @@ public class CustomStack<T> {
 	}
 
 	/**
+	 * empties the current stack and putting the elements in another stack, effectively reversing it.
+	 *
+	 * @return						the original stack in reversed order
+	 */
+	public CustomStack<T> reverse ()
+	{
+		CustomStack<T> outputStack = new CustomStack<T>();
+		while ( !this.isEmpty() )
+			outputStack.push( this.pop() );
+		return outputStack;
+	}
+
+	/**
 	 * searches for an item in the stack and returns the position of the item counting
 	 * from the top down, if this item is indeed in the stack. Otherwise, a RunTimeExcpetion
 	 * (more specifically, a NoSuchElementException) occurs.
